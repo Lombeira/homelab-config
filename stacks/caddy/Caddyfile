@@ -1,0 +1,12 @@
+http://nossa.casa, http://home.casa, http://casa.lan {
+	reverse_proxy 192.168.1.173:3002
+}
+
+http://escritorio.casa {
+	handle /terminal* {
+		reverse_proxy 127.0.0.1:7681
+	}
+	handle {
+		reverse_proxy 127.0.0.1:3010
+	}
+}

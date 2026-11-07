@@ -1,0 +1,29 @@
+title: Casa
+showStats: true
+background:
+  image: /images/background.jpg
+  blur: sm
+  brightness: 45
+  opacity: 35
+cardBlur: xl
+theme: dark
+color: slate
+headerStyle: boxedWidgets
+hideVersion: true
+target: _blank
+layout:
+  Casa:
+    style: row
+    columns: 3
+  Mídia:
+    style: row
+    columns: 3
+  Rede:
+    style: row
+    columns: 3
+  Monitoramento:
+    style: row
+    columns: 3
+  Ferramentas:
+    style: row
+    columns: 3

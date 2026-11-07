@@ -1,0 +1,5 @@
+sudo:x:27:glauco
+glauco:x:1000:
+docker:x:973:glauco,hermes
+hermes:x:1001:
+leme:x:1002:

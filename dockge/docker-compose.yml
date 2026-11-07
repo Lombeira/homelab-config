@@ -1,0 +1,22 @@
+services:
+  dockge:
+    image: louislam/dockge:1
+    container_name: dockge
+    restart: unless-stopped
+    ports:
+    - 5001:5001
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./data:/app/data
+    - /home/glauco/homelab/stacks:/home/glauco/homelab/stacks
+    environment:
+    - DOCKGE_STACKS_DIR=/home/glauco/homelab/stacks
+    labels:
+    - homepage.group=Ferramentas
+    - homepage.name=Dockge
+    - homepage.href=http://dockge.casa:5001
+    - homepage.description=Gerenciar containers
+    - homepage.icon=dockge.png
+    - kuma.dockge.http.name=Dockge
+    - kuma.dockge.http.url=http://192.168.1.173:5001
+    - kuma.dockge.http.interval=60

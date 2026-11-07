@@ -1,0 +1,47 @@
+services:
+  nextcloud-db:
+    image: postgres:16-alpine
+    container_name: nextcloud-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./db:/var/lib/postgresql/data
+  nextcloud-redis:
+    image: redis:alpine
+    container_name: nextcloud-redis
+    restart: unless-stopped
+  nextcloud:
+    image: nextcloud:apache
+    container_name: nextcloud
+    restart: unless-stopped
+    ports:
+      - 8084:80
+    environment:
+      POSTGRES_HOST: nextcloud-db
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      REDIS_HOST: nextcloud-redis
+      NEXTCLOUD_TRUSTED_DOMAINS: 192.168.1.173 nextcloud.casa localhost
+    volumes:
+      - ./html:/var/www/html
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    labels:
+      - homepage.name=Nextcloud
+      - homepage.href=http://nextcloud.casa:8084
+      - homepage.description=Drive, agenda e contatos
+      - homepage.icon=nextcloud.png
+      - homepage.group=Mídia
+      - kuma.nextcloud.http.name=Nextcloud
+      - kuma.nextcloud.http.url=http://192.168.1.173:8084/status.php
+      - kuma.nextcloud.http.interval=60
+      - homepage.widget.type=nextcloud
+      - homepage.widget.url=http://192.168.1.173:8084
+      - homepage.widget.username=${NC_USER}
+      - homepage.widget.password=${NC_PASSWORD}
+networks: {}

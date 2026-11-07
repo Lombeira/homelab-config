@@ -1,0 +1,21 @@
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    network_mode: host
+    environment:
+      TZ: America/Sao_Paulo
+    volumes:
+    - ./config:/config
+    - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    stop_grace_period: 60s
+    labels:
+    - homepage.group=Casa
+    - homepage.name=Home Assistant
+    - homepage.href=http://nossa.casa:8123
+    - homepage.description=Automação e dispositivos
+    - homepage.icon=home-assistant.png
+    - kuma.homeassistant.http.name=Home Assistant
+    - kuma.homeassistant.http.url=http://192.168.1.173:8123
+    - kuma.homeassistant.http.interval=60

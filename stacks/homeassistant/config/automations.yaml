@@ -1,0 +1,152 @@
+- id: '1792345434488'
+  alias: Alerta luminoso
+  description: Pisca o abajour, os spots e a Sanca. A cor vem na URL (?cor=nome);
+    padrão azul-celeste.
+  triggers:
+  - trigger: webhook
+    webhook_id: slack-leme-e816fd8085ea
+    allowed_methods:
+    - POST
+    - GET
+    local_only: true
+  actions:
+  - action: scene.create
+    data:
+      scene_id: luzes_antes_do_alerta
+      snapshot_entities: '{{ luzes }}'
+  - repeat:
+      count: 8
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: '{{ luzes }}'
+        data:
+          color_name: '{{ cor }}'
+          brightness_pct: 100
+      - delay:
+          milliseconds: 800
+      - action: light.turn_off
+        target:
+          entity_id: '{{ luzes }}'
+      - delay:
+          milliseconds: 600
+  - action: light.turn_on
+    target:
+      entity_id: '{{ luzes }}'
+    data:
+      color_temp_kelvin: 2700
+      brightness_pct: 80
+  - delay:
+      milliseconds: 500
+  - action: scene.turn_on
+    target:
+      entity_id: scene.luzes_antes_do_alerta
+  mode: single
+  max_exceeded: silent
+  variables:
+    cor: '{{ trigger.query.cor | default(''deepskyblue'') }}'
+    luzes:
+    - light.abajour_escritorio
+    - light.spot_feda
+    - light.spot_glauco
+    - light.spot_levi
+    - light.living_room_sanca
+- id: '1792346999258'
+  alias: Modo cinema na sala
+  description: Instantâneo via webhook do Jellyfin. Play apaga sala, cozinha e abajour;
+    pause acende no branco quente; stop restaura.
+  triggers:
+  - trigger: webhook
+    webhook_id: jellyfin-cinema-2314175daf90
+    allowed_methods:
+    - POST
+    local_only: true
+  conditions:
+  - '{{ ''sala'' in (trigger.json.DeviceName | default('''') | lower) }}'
+  actions:
+  - choose:
+    - conditions: '{{ evento == ''PlaybackStart'' }}'
+      sequence:
+      - action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.cinema_pausado
+      - action: light.turn_off
+        target:
+          entity_id: '{{ apagar_no_play }}'
+      - action: light.turn_on
+        target:
+          entity_id: light.living_room_sanca
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 1
+    - conditions: '{{ evento == ''PlaybackProgress'' and pausado and is_state(''input_boolean.cinema_pausado'',
+        ''off'') }}'
+      sequence:
+      - action: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.cinema_pausado
+      - action: light.turn_on
+        target:
+          entity_id: light.living_room_sanca
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 20
+      - action: light.turn_on
+        target:
+          entity_id: light.abajour_escritorio
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 80
+      - action: light.turn_on
+        target:
+          entity_id: '{{ spots }}'
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 1
+    - conditions: '{{ evento == ''PlaybackProgress'' and not pausado and is_state(''input_boolean.cinema_pausado'',
+        ''on'') }}'
+      sequence:
+      - action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.cinema_pausado
+      - action: light.turn_off
+        target:
+          entity_id: '{{ apagar_no_play }}'
+      - action: light.turn_on
+        target:
+          entity_id: light.living_room_sanca
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 1
+    - conditions: '{{ evento == ''PlaybackStop'' }}'
+      sequence:
+      - action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.cinema_pausado
+      - action: light.turn_on
+        target:
+          entity_id: light.living_room_sanca
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 20
+      - action: light.turn_on
+        target:
+          entity_id: light.abajour_escritorio
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 80
+      - action: light.turn_on
+        target:
+          entity_id: '{{ spots }}'
+        data:
+          color_temp_kelvin: 2000
+          brightness_pct: 1
+  mode: queued
+  variables:
+    evento: '{{ trigger.json.NotificationType | default('''') }}'
+    pausado: '{{ trigger.json.IsPaused | default(false) | bool }}'
+    luzes_cinema: "{{ (area_entities('living_room') + area_entities('kitchen'))\n\
+      \   | select('match', 'light\\.') | list }}"
+    apagar_no_play: '{{ states.light | map(attribute=''entity_id'') | reject(''eq'',
+      ''light.living_room_sanca'') | list }}'
+    spots: '{{ luzes_cinema | select(''match'', ''light\.spot_'') | list }}'

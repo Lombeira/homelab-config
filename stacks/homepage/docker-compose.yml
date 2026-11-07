@@ -1,0 +1,13 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./config:/app/config
+      - ./images:/app/public/images
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=nossa.casa,home.casa,casa.lan,nossa.casa:3002,status.casa:3002,192.168.1.173:3002,192.168.1.173

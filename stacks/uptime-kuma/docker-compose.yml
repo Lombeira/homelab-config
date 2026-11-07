@@ -1,0 +1,18 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+    - 3001:3001
+    volumes:
+    - ./data:/app/data
+    labels:
+    - homepage.group=Monitoramento
+    - homepage.name=Uptime Kuma
+    - homepage.href=http://status.casa:3001
+    - homepage.description=Status dos servicos
+    - homepage.icon=uptime-kuma.png
+    - homepage.widget.type=uptimekuma
+    - homepage.widget.url=http://192.168.1.173:3001
+    - homepage.widget.slug=homelab

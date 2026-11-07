@@ -1,0 +1,136 @@
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: unless-stopped
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: America/Sao_Paulo
+    ports:
+    - 9696:9696
+    volumes:
+    - ./prowlarr:/config
+    labels:
+    - homepage.group=Downloads
+    - homepage.name=Prowlarr
+    - homepage.href=http://prowlarr.casa:9696
+    - homepage.description=Buscador/indexers
+    - homepage.icon=prowlarr.png
+    - kuma.prowlarr.http.name=Prowlarr
+    - kuma.prowlarr.http.url=http://192.168.1.173:9696
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: America/Sao_Paulo
+    ports:
+    - 7878:7878
+    volumes:
+    - ./radarr:/config
+    - /home/glauco/homelab/media:/data
+    labels:
+    - homepage.group=Downloads
+    - homepage.name=Radarr
+    - homepage.href=http://radarr.casa:7878
+    - homepage.description=Filmes
+    - homepage.icon=radarr.png
+    - kuma.radarr.http.name=Radarr
+    - kuma.radarr.http.url=http://192.168.1.173:7878
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: America/Sao_Paulo
+    ports:
+    - 8989:8989
+    volumes:
+    - ./sonarr:/config
+    - /home/glauco/homelab/media:/data
+    labels:
+    - homepage.group=Downloads
+    - homepage.name=Sonarr
+    - homepage.href=http://sonarr.casa:8989
+    - homepage.description=Séries
+    - homepage.icon=sonarr.png
+    - kuma.sonarr.http.name=Sonarr
+    - kuma.sonarr.http.url=http://192.168.1.173:8989
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: unless-stopped
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: America/Sao_Paulo
+      WEBUI_PORT: '8088'
+    ports:
+    - 8088:8088
+    - 6881:6881
+    - 6881:6881/udp
+    volumes:
+    - ./qbittorrent:/config
+    - /home/glauco/homelab/media:/data
+    labels:
+    - homepage.group=Downloads
+    - homepage.name=qBittorrent
+    - homepage.href=http://qbit.casa:8088
+    - homepage.description=Baixador
+    - homepage.icon=qbittorrent.png
+    - kuma.qbittorrent.http.name=qBittorrent
+    - kuma.qbittorrent.http.url=http://192.168.1.173:8088
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
+    restart: unless-stopped
+    user: 1000:1000
+    environment:
+      TZ: America/Sao_Paulo
+    ports:
+    - 5055:5055
+    volumes:
+    - ./seerr:/app/config
+    labels:
+    - homepage.group=Mídia
+    - homepage.name=Seerr
+    - homepage.href=http://pedidos.casa:5055
+    - homepage.description=Pedir filmes/séries
+    - homepage.icon=jellyseerr.png
+    - kuma.seerr.http.name=Seerr
+    - kuma.seerr.http.url=http://192.168.1.173:5055
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    environment:
+      LOG_LEVEL: info
+      TZ: America/Sao_Paulo
+    ports:
+    - 8191:8191
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    restart: unless-stopped
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: America/Sao_Paulo
+    ports:
+    - 6767:6767
+    volumes:
+    - ./bazarr:/config
+    - /home/glauco/homelab/media:/data
+    labels:
+    - homepage.group=Downloads
+    - homepage.name=Bazarr
+    - homepage.href=http://bazarr.casa:6767
+    - homepage.description=Legendas automáticas
+    - homepage.icon=bazarr.png
+    - kuma.bazarr.http.name=Bazarr
+    - kuma.bazarr.http.url=http://192.168.1.173:6767

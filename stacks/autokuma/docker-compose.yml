@@ -1,0 +1,12 @@
+services:
+  autokuma:
+    image: ghcr.io/bigboot/autokuma:latest
+    container_name: autokuma
+    restart: unless-stopped
+    environment:
+      AUTOKUMA__KUMA__URL: http://192.168.1.173:3001
+      AUTOKUMA__KUMA__USERNAME: glauco
+      AUTOKUMA__KUMA__PASSWORD: ${KUMA_PASSWORD}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+networks: {}

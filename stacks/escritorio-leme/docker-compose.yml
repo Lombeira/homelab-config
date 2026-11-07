@@ -1,0 +1,32 @@
+services:
+  escritorio-leme:
+    build: ./app
+    image: escritorio-leme:local
+    container_name: escritorio-leme
+    restart: unless-stopped
+    user: "1002:1002"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - 127.0.0.1:3010:8000
+    volumes:
+      - /home/leme/workspace:/data/glauco/workspace:ro
+      - /home/leme/.claude/projects:/data/glauco/claude:ro
+      - /home/leme/workspace/.escritorio/fila:/data/glauco/fila:rw
+      - /home/leme/workspace/.escritorio/respostas:/data/glauco/respostas:rw
+      - /home/leme/workspace/.escritorio/novos:/data/glauco/novos:rw
+    environment:
+      - FILA_DIR=/data/glauco/fila
+      - RESP_DIR=/data/glauco/respostas
+      - NOVOS_DIR=/data/glauco/novos
+    labels:
+      - homepage.group=Ferramentas
+      - homepage.name=Escritório Leme
+      - homepage.href=http://escritorio.casa
+      - homepage.description=Time de agentes e cérebro da Leme
+      - homepage.icon=mdi-office-building

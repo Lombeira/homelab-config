@@ -1,0 +1,40 @@
+services:
+  scrutiny:
+    image: ghcr.io/analogj/scrutiny:master-omnibus
+    container_name: scrutiny
+    restart: unless-stopped
+    cap_add:
+    - SYS_RAWIO
+    ports:
+    - 8087:8080
+    devices:
+    - /dev/sda
+    volumes:
+    - /run/udev:/run/udev:ro
+    - ./config:/opt/scrutiny/config
+    - ./influxdb:/opt/scrutiny/influxdb
+    labels:
+    - homepage.group=Monitoramento
+    - homepage.name=Scrutiny
+    - homepage.href=http://scrutiny.casa:8087
+    - homepage.description=Saúde dos discos (SMART)
+    - homepage.icon=scrutiny.png
+    - kuma.scrutiny.http.name=Scrutiny
+    - kuma.scrutiny.http.url=http://192.168.1.173:8087
+    - kuma.scrutiny.http.interval=60
+    - homepage.widget.type=customapi
+    - homepage.widget.url=http://192.168.1.173:8087/api/summary
+    - homepage.widget.refreshInterval=60000
+    - homepage.widget.mappings[0].label=Disco
+    - homepage.widget.mappings[0].field.data.summary.0x50025388a0767613.device=model_name
+    - homepage.widget.mappings[1].label=Temp
+    - homepage.widget.mappings[1].field.data.summary.0x50025388a0767613.smart=temp
+    - homepage.widget.mappings[1].suffix=°C
+    - homepage.widget.mappings[2].label=Status
+    - homepage.widget.mappings[2].field.data.summary.0x50025388a0767613.device=device_status
+    - homepage.widget.mappings[2].remap[0].value=0
+    - homepage.widget.mappings[2].remap[0].to=Saudável
+    - homepage.widget.mappings[2].remap[1].value=1
+    - homepage.widget.mappings[2].remap[1].to=Atenção
+    - homepage.widget.mappings[2].remap[2].value=2
+    - homepage.widget.mappings[2].remap[2].to=Falha

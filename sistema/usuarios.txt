@@ -1,0 +1,3 @@
+glauco:1000:1000:/home/glauco:/usr/bin/zsh
+hermes:1001:1001:/home/hermes:/bin/bash
+leme:1002:1002:/home/leme:/bin/bash
