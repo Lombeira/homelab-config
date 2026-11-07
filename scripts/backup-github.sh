@@ -113,9 +113,12 @@ lsb_release -ds > "$SYS/os.txt" 2>/dev/null || true
   echo "- Usuário hermes (Hermes Agent): fora deste backup"
 } > "$REPO_H/SEGREDOS.md"
 
+# ---------- pipe de mídia: configuração pelas APIs, sem segredos ----------
+python3 -I "$HOME_G/homelab/scripts/exportar-media.py" "$REPO_H/stacks/media/export" >>"$LOG" 2>&1 || log "exportar-media falhou (segue o backup sem a exportação)"
+
 # ---------- trava: nada com cara de segredo vai para o GitHub ----------
 PAT='(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-ant-[A-Za-z0-9_-]{20,}|ATATT[A-Za-z0-9_-]{20,}|-----BEGIN [A-Z ]*PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]{10,}|AKIA[0-9A-Z]{16}|"accessToken"\s*:\s*"[^"]{20,}|"refreshToken"\s*:\s*"[^"]{20,})'
-ACHOU=$(grep -rIlE "$PAT" "$REPO_H" "$REPO_L" --exclude-dir=.git 2>/dev/null || true)
+ACHOU=$( { grep -rIlE "$PAT" "$REPO_H" "$REPO_L" --exclude-dir=.git; grep -rIliE '"(api[_-]?key|password|passwd|token|secret)"[[:space:]]*:[[:space:]]*"[^"<]{6,}"' "$REPO_H" "$REPO_L" --exclude-dir=.git; } 2>/dev/null | sort -u || true)
 if [ -n "$ACHOU" ]; then
   log "ABORTADO: possível segredo em:"; echo "$ACHOU" | tee -a "$LOG"; exit 2
 fi

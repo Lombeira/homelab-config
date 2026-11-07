@@ -1,0 +1,1105 @@
+{
+  "providers": {
+    "data": [
+      {
+        "name": "animekalesi",
+        "retry": "-",
+        "status": "Good"
+      },
+      {
+        "name": "legendasdivx",
+        "retry": "-",
+        "status": "Good"
+      },
+      {
+        "name": "legendasnet",
+        "retry": "in an hour",
+        "status": "ConfigurationError"
+      },
+      {
+        "name": "opensubtitlescom",
+        "retry": "-",
+        "status": "Good"
+      },
+      {
+        "name": "pipocas",
+        "retry": "in 7 hours",
+        "status": "ConfigurationError"
+      },
+      {
+        "name": "subdl",
+        "retry": "-",
+        "status": "Good"
+      }
+    ]
+  },
+  "settings": {
+    "addic7ed": {
+      "cookies": "",
+      "password": "",
+      "user_agent": "",
+      "username": "",
+      "vip": false
+    },
+    "analytics": {
+      "enabled": true
+    },
+    "anidb": {
+      "api_client": "",
+      "api_client_ver": 1
+    },
+    "animetosho": {
+      "anidb_api_client": "",
+      "anidb_api_client_ver": 1,
+      "search_threshold": 6
+    },
+    "anticaptcha": {
+      "anti_captcha_key": ""
+    },
+    "assrt": {
+      "token": ""
+    },
+    "auth": {
+      "apikey": "<PREENCHER>",
+      "password": "<PREENCHER>",
+      "type": "form",
+      "username": "<PREENCHER>"
+    },
+    "avistaz": {
+      "cookies": "",
+      "user_agent": ""
+    },
+    "backup": {
+      "day": 6,
+      "folder": "/config/backup",
+      "frequency": "Weekly",
+      "hour": 3,
+      "retention": 31
+    },
+    "betaseries": {
+      "token": ""
+    },
+    "captchaai": {
+      "captchaai_key": ""
+    },
+    "cinemaz": {
+      "cookies": "",
+      "user_agent": ""
+    },
+    "cors": {
+      "enabled": false
+    },
+    "deathbycaptcha": {
+      "password": "",
+      "username": ""
+    },
+    "embeddedsubtitles": {
+      "fallback_lang": "en",
+      "hi_fallback": false,
+      "included_codecs": [],
+      "timeout": 600,
+      "unknown_as_fallback": false
+    },
+    "general": {
+      "adaptive_searching": true,
+      "adaptive_searching_delay": "3w",
+      "adaptive_searching_delta": "1w",
+      "anti_captcha_provider": null,
+      "auto_update": true,
+      "base_url": "",
+      "branch": "master",
+      "chmod": "0640",
+      "chmod_enabled": false,
+      "concurrent_jobs": 4,
+      "days_to_upgrade_subs": 7,
+      "debug": false,
+      "default_und_audio_lang": "",
+      "default_und_embedded_subtitles_lang": "",
+      "disable_all_providers_ssl_verify": false,
+      "dont_notify_manual_actions": false,
+      "embedded_subs_show_desired": true,
+      "embedded_subtitles_parser": "ffprobe",
+      "enable_strm_support": false,
+      "enabled_integrations": [],
+      "enabled_providers": [
+        "animekalesi",
+        "opensubtitlescom",
+        "legendasnet",
+        "legendasdivx",
+        "pipocas",
+        "subdl"
+      ],
+      "external_webhook_password": "",
+      "external_webhook_url": "",
+      "external_webhook_username": "",
+      "hi_extension": "hi",
+      "hostname": "192.168.1.173",
+      "ignore_ass_subs": false,
+      "ignore_pgs_subs": false,
+      "ignore_vobsub_subs": false,
+      "instance_name": "Bazarr",
+      "ip": "*",
+      "language_equals": [],
+      "minimum_score": 90,
+      "minimum_score_movie": 70,
+      "movie_default_enabled": true,
+      "movie_default_profile": 1,
+      "movie_tag_enabled": false,
+      "multithreading": true,
+      "notify_if_nothing_is_missing_for_signalr_event": false,
+      "page_size": 25,
+      "parse_embedded_audio_track": false,
+      "path_mappings": [],
+      "path_mappings_movie": [],
+      "port": 6767,
+      "postprocessing_cmd": "",
+      "postprocessing_threshold": 90,
+      "postprocessing_threshold_movie": 70,
+      "remove_profile_tags": [],
+      "serie_default_enabled": true,
+      "serie_default_profile": 1,
+      "serie_tag_enabled": false,
+      "show_live_badge": true,
+      "single_language": false,
+      "skip_hashing": false,
+      "subfolder": "current",
+      "subfolder_custom": "",
+      "subzero_mods": [],
+      "theme": "auto",
+      "upgrade_frequency": 12,
+      "upgrade_manual": true,
+      "upgrade_subs": true,
+      "use_embedded_subs": true,
+      "use_external_webhook": false,
+      "use_jellyfin": true,
+      "use_plex": false,
+      "use_postprocessing": false,
+      "use_postprocessing_threshold": false,
+      "use_postprocessing_threshold_movie": false,
+      "use_radarr": true,
+      "use_scenename": true,
+      "use_sonarr": true,
+      "use_whisper_fallback": false,
+      "use_whisper_fallback_series": false,
+      "utf8_encode": true,
+      "wanted_search_frequency": 6,
+      "wanted_search_frequency_movie": 6
+    },
+    "hdbits": {
+      "passkey": "",
+      "username": ""
+    },
+    "jellyfin": {
+      "apikey": "<PREENCHER>",
+      "movie_library": [
+        "Filmes"
+      ],
+      "movie_library_ids": [
+        "af92f2d68eea947c7f9df41836afb987"
+      ],
+      "refresh_method": "immediate",
+      "series_library": [
+        "Séries"
+      ],
+      "series_library_ids": [
+        "d565273fd114d77bdf349a2896867069"
+      ],
+      "update_movie_library": true,
+      "update_series_library": true,
+      "url": "http://192.168.1.173:8096"
+    },
+    "jimaku": {
+      "api_key": "",
+      "enable_ai_subs": false,
+      "enable_archives_download": false,
+      "enable_name_search_fallback": true
+    },
+    "karagarga": {
+      "f_password": "",
+      "f_username": "",
+      "password": "",
+      "username": ""
+    },
+    "ktuvit": {
+      "email": "",
+      "hashed_password": ""
+    },
+    "legendasdivx": {
+      "password": "",
+      "skip_wrong_fps": false,
+      "username": ""
+    },
+    "legendasnet": {
+      "password": "<PREENCHER>",
+      "username": "<PREENCHER>"
+    },
+    "log": {
+      "exclude_filter": "",
+      "ignore_case": false,
+      "include_filter": "",
+      "use_regex": false
+    },
+    "napiprojekt": {
+      "hash_only": false,
+      "only_authors": false,
+      "only_real_names": false
+    },
+    "napisy24": {
+      "password": "",
+      "username": ""
+    },
+    "notifications": {
+      "providers": [
+        {
+          "enabled": false,
+          "name": "46elks",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "AWS Simple Email Service (SES)",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "AWS Simple Notification Service (SNS)",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Africas Talking",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Amazon Chime",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Apprise API",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Aprs",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Bark",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "BlueSky",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Brevo",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "BulkSMS",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "BulkVS",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Burst SMS",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Chanify",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Cisco Webex Teams",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "ClickSend",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Clickatell",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "D7 Networks",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Dapnet",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "DingTalk",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Discord",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Dot.",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "E-Mail",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Emby",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Enigma2",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Evolution API",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Exotel",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Feishu",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Flock",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Fluxer",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Form",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Free-Mobile",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Google Chat",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Gotify",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "GroupMe",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Guilded",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "HomeAssistant",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "HumHub",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "IFTTT",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "IRC",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "JSON",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Jellyfin",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Jira",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Join",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Kavenegar",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Kodi/XBMC",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Kumulos",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "LaMetric",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Lark (Feishu)",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Line",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "MSG91",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Mailgun",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Mastodon",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Matrix",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Mattermost",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "MessageBird",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Misskey",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Nextcloud",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Nextcloud Talk",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Notica",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Notifiarr",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "NotificationAPI",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Notifico",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Octopush",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Office 365",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "OneSignal",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Opsgenie",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pager Duty",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "PagerTree",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Parse Platform",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Plivo",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "PopcornNotify",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Postmark",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Power Automate / Workflows (for MSTeams)",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Prowl",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "PushDeer",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "PushMe",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pushbullet",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pushed",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pushjet",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pushover",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pushplus",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pushsafer",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Pushy",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "QQ Push",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Reddit",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Remote Syslog",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Resend",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Revolt",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "RingCentral",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Rocket.Chat",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Ryver",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SIGNL4",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SMS Eagle",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SMS Manager",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SMTP2Go",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SendGrid",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SendPulse",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "ServerChan",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Signal API",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Sinch",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Slack",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Société Française du Radiotéléphone",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SparkPost",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Spike.sh",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Splunk On-Call",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "SpugPush",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Streamlabs",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Synology Chat",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Syslog",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Techulus Push",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Telegram",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Threema Gateway",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Twilio",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Twist",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Twitter",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Viber",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "VoIPms",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Vonage",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "WeChat (WeCom)",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "WeCom Bot",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "WhatsApp",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "WxPusher",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "XML",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Zoom",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "Zulip",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "httpSMS",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "ntfy",
+          "url": null
+        },
+        {
+          "enabled": false,
+          "name": "seven",
+          "url": null
+        }
+      ]
+    },
+    "opensubtitlescom": {
+      "include_ai_translated": true,
+      "include_machine_translated": false,
+      "password": "<PREENCHER>",
+      "use_hash": true,
+      "username": "<PREENCHER>"
+    },
+    "pipocas": {
+      "password": "",
+      "username": ""
+    },
+    "plex": {
+      "apikey": "",
+      "auth_method": "<PREENCHER>",
+      "client_identifier": "",
+      "disable_auto_migration": false,
+      "email": "",
+      "encryption_key": "<PREENCHER>",
+      "ip": "127.0.0.1",
+      "migration_attempted": false,
+      "migration_successful": false,
+      "migration_timestamp": "",
+      "movie_library": [],
+      "movie_library_ids": [],
+      "port": 32400,
+      "series_library": [],
+      "series_library_ids": [],
+      "server_local": false,
+      "server_machine_id": "",
+      "server_name": "",
+      "server_url": "",
+      "set_episode_added": false,
+      "set_movie_added": false,
+      "ssl": false,
+      "token": "",
+      "update_movie_library": false,
+      "update_series_library": false,
+      "user_id": "",
+      "username": ""
+    },
+    "postgresql": {
+      "database": "",
+      "enabled": false,
+      "host": "localhost",
+      "password": "",
+      "port": 5432,
+      "url": "",
+      "username": ""
+    },
+    "proxy": {
+      "exclude": [
+        "localhost",
+        "127.0.0.1"
+      ],
+      "password": "",
+      "port": "",
+      "type": null,
+      "url": "",
+      "username": ""
+    },
+    "radarr": {
+      "apikey": "<PREENCHER>",
+      "base_url": "",
+      "defer_search_signalr": false,
+      "excluded_tags": [],
+      "full_update": "Daily",
+      "full_update_day": 6,
+      "full_update_hour": 4,
+      "http_timeout": 60,
+      "ip": "radarr",
+      "movies_sync": 60,
+      "movies_sync_on_live": true,
+      "only_monitored": true,
+      "port": 7878,
+      "ssl": false,
+      "sync_only_monitored_movies": false,
+      "use_ffprobe_cache": true
+    },
+    "sonarr": {
+      "apikey": "<PREENCHER>",
+      "base_url": "",
+      "defer_search_signalr": false,
+      "exclude_season_zero": true,
+      "excluded_series_types": [],
+      "excluded_tags": [],
+      "full_update": "Daily",
+      "full_update_day": 6,
+      "full_update_hour": 4,
+      "http_timeout": 60,
+      "ip": "sonarr",
+      "only_monitored": true,
+      "port": 8989,
+      "series_sync": 60,
+      "series_sync_on_live": true,
+      "ssl": false,
+      "sync_only_monitored_episodes": false,
+      "sync_only_monitored_series": false,
+      "use_ffprobe_cache": true
+    },
+    "subdl": {
+      "ai_translate": false,
+      "api_key": "<PREENCHER>",
+      "include_ai_translated": false
+    },
+    "subf2m": {
+      "user_agent": "",
+      "verify_ssl": true
+    },
+    "subsarr": {
+      "base_url": ""
+    },
+    "subsdump": {
+      "api_key": "",
+      "base_url": ""
+    },
+    "subsource": {
+      "apikey": ""
+    },
+    "subsro": {
+      "api_key": ""
+    },
+    "subsync": {
+      "auto_use_original_language": false,
+      "checker": {
+        "blacklisted_languages": [],
+        "blacklisted_providers": []
+      },
+      "debug": false,
+      "force_audio": false,
+      "gss": true,
+      "max_offset_seconds": 60,
+      "no_fix_framerate": true,
+      "quality_max_framerate_deviation": 0.1,
+      "quality_max_offset_seconds": 30,
+      "quality_min_score": 0.0,
+      "subsync_movie_threshold": 70,
+      "subsync_threshold": 90,
+      "use_original_language": false,
+      "use_subsync": false,
+      "use_subsync_movie_threshold": false,
+      "use_subsync_threshold": false
+    },
+    "subtitlecat": {
+      "include_machine_translated": false
+    },
+    "subx": {
+      "api_key": ""
+    },
+    "titlovi": {
+      "password": "",
+      "username": ""
+    },
+    "titulky": {
+      "approved_only": false,
+      "password": "",
+      "skip_wrong_fps": false,
+      "username": ""
+    },
+    "translator": {
+      "default_score": 50,
+      "gemini_batch_size": 300,
+      "gemini_keys": [],
+      "gemini_model": "gemini-2.0-flash",
+      "lingarr_token": "",
+      "lingarr_url": "http://lingarr:9876",
+      "translator_info": true,
+      "translator_type": "google_translate"
+    },
+    "turkcealtyaziorg": {
+      "cookies": "",
+      "user_agent": ""
+    },
+    "whisperai": {
+      "endpoint": "http://127.0.0.1:9000",
+      "loglevel": "INFO",
+      "pass_video_name": false,
+      "response": 5,
+      "timeout": 3600
+    },
+    "xsubs": {
+      "password": "",
+      "username": ""
+    }
+  },
+  "system/languages/profiles": [
+    {
+      "cutoff": null,
+      "items": [
+        {
+          "audio_exclude": "False",
+          "audio_only_include": "False",
+          "forced": "False",
+          "hi": "False",
+          "id": 1,
+          "language": "pb"
+        }
+      ],
+      "mustContain": [],
+      "mustNotContain": [],
+      "name": "PT-BR",
+      "originalFormat": 0,
+      "profileId": 1,
+      "tag": null
+    }
+  ]
+}
