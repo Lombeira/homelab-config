@@ -12,6 +12,9 @@ headerStyle: boxedWidgets
 hideVersion: true
 target: _blank
 layout:
+  Escritórios:
+    style: row
+    columns: 3
   Casa:
     style: row
     columns: 3
@@ -25,5 +28,8 @@ layout:
     style: row
     columns: 3
   Ferramentas:
+    style: row
+    columns: 3
+  Downloads:
     style: row
     columns: 3

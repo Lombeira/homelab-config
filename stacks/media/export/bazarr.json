@@ -8,12 +8,12 @@
       },
       {
         "name": "legendasdivx",
-        "retry": "-",
-        "status": "Good"
+        "retry": "in 10 hours",
+        "status": "AuthenticationError"
       },
       {
         "name": "legendasnet",
-        "retry": "in an hour",
+        "retry": "in 10 hours",
         "status": "ConfigurationError"
       },
       {
@@ -23,7 +23,7 @@
       },
       {
         "name": "pipocas",
-        "retry": "in 7 hours",
+        "retry": "in 10 hours",
         "status": "ConfigurationError"
       },
       {

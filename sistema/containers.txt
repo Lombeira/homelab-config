@@ -3,6 +3,7 @@ autokuma	ghcr.io/bigboot/autokuma:latest
 bazarr	lscr.io/linuxserver/bazarr:latest
 caddy	caddy:2-alpine
 dockge	louislam/dockge:1
+ensaio	ensaio-ubuntu
 escritorio-leme	escritorio-leme:local
 flaresolverr	ghcr.io/flaresolverr/flaresolverr:latest
 hermes-cb5449e9	nousresearch/hermes-sandbox:desktop

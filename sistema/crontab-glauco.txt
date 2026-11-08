@@ -1,0 +1,1 @@
+30 3 * * * $HOME/homelab/scripts/backup-github.sh >/dev/null 2>&1

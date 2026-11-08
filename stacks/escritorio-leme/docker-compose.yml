@@ -25,7 +25,7 @@ services:
       - RESP_DIR=/data/glauco/respostas
       - NOVOS_DIR=/data/glauco/novos
     labels:
-      - homepage.group=Ferramentas
+      - homepage.group=Escritórios
       - homepage.name=Escritório Leme
       - homepage.href=http://escritorio.casa
       - homepage.description=Time de agentes e cérebro da Leme
