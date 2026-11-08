@@ -79,8 +79,11 @@ done
   echo "# Segredos que NÃO estão no backup (recriar à mão no PC novo)"
   echo
   echo "## Usuário leme"
-  for f in .claude/.credentials.json .config/gh/hosts.yml .config/leme-escritorio/atlassian.env .config/leme-escritorio/qa.env; do
+  for f in .claude/.credentials.json .config/gh/hosts.yml; do
     [ -e "$LH/$f" ] && echo "- \`~/$f\`"
+  done
+  for e in "$LH"/.config/leme-escritorio/*; do
+    [ -f "$e" ] && echo "- \`~/.config/leme-escritorio/$(basename "$e")\` (modelo: $(basename "$e").example)"
   done
   for k in "$LH"/.ssh/id_*; do case "$k" in *.pub) ;; *) [ -f "$k" ] && echo "- \`~/.ssh/$(basename "$k")\` (pública: $(cat "$k.pub" 2>/dev/null | cut -d' ' -f1-2 | cut -c1-40)…)";; esac; done
 } > "$L/SEGREDOS.md"

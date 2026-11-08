@@ -24,7 +24,7 @@ IMG_NOME_RE = re.compile(r"^[A-Za-z0-9._-]{1,80}$")
 MAX_IMGS, MAX_IMG_BYTES = 10, 8 * 1024 * 1024
 KEY_RE = re.compile(r"^(?:[A-Z][A-Z0-9]+-\d+|PR-[A-Za-z0-9._-]+-\d+)$")
 KEY_PAT = r"(?:[A-Z][A-Z0-9]+-\d+|PR-[A-Za-z0-9._-]+-\d+)"
-ACOES = {"triagem", "aprovar", "devolver", "atualizar_pendencias", "retomar", "limpar", "faxina", "remover_anexo", "novo_card", "confirmar_card", "revisar_pr", "sugestao_aprovar", "sugestao_ignorar", "sugestao_duplicada"}
+ACOES = {"triagem", "aprovar", "devolver", "atualizar_pendencias", "retomar", "limpar", "faxina", "remover_anexo", "novo_card", "confirmar_card", "revisar_pr", "sugestao_aprovar", "sugestao_ignorar", "sugestao_duplicada", "sugestao_descartar"}
 SUG_ID_RE = re.compile(r"^s[0-9A-Za-z_-]{6,60}$")
 PR_URL_RE = re.compile(r"^https://github\.com/(leme-tech)/([A-Za-z0-9._-]+)/pull/(\d+)/?(?:[#?].*)?$")
 PESSOAS = {"glauco", "feda"}
@@ -422,7 +422,7 @@ def collect_pipeline():
         for f in sorted(fila_dir.glob("*.json")):
             item = read_json(f, None)
             if isinstance(item, dict):
-                fila.append({k: item.get(k) for k in ("key", "acao", "por", "em", "arquivo")})
+                fila.append({k: item.get(k) for k in ("key", "acao", "por", "em", "arquivo", "sugestao", "novo")})
     arquivo = []
     arq = base / "arquivo.jsonl"
     if arq.is_file():
@@ -727,7 +727,7 @@ def enqueue(payload):
                 return 400, "informe o card que já existe (ex.: LM-1234)"
         if acao == "sugestao_ignorar" and not comentario:
             return 400, "diga por que ignorar (ajuda o ouvidor a aprender)"
-    if acao not in ("atualizar_pendencias", "faxina", "novo_card", "confirmar_card", "revisar_pr", "sugestao_aprovar", "sugestao_ignorar") and not KEY_RE.match(key):
+    if acao not in ("atualizar_pendencias", "faxina", "novo_card", "confirmar_card", "revisar_pr", "sugestao_aprovar", "sugestao_ignorar", "sugestao_descartar") and not KEY_RE.match(key):
         return 400, "card inválido"
     if acao == "devolver" and not comentario:
         return 400, "devolver precisa de um comentário"
