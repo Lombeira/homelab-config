@@ -24,7 +24,8 @@ IMG_NOME_RE = re.compile(r"^[A-Za-z0-9._-]{1,80}$")
 MAX_IMGS, MAX_IMG_BYTES = 10, 8 * 1024 * 1024
 KEY_RE = re.compile(r"^(?:[A-Z][A-Z0-9]+-\d+|PR-[A-Za-z0-9._-]+-\d+)$")
 KEY_PAT = r"(?:[A-Z][A-Z0-9]+-\d+|PR-[A-Za-z0-9._-]+-\d+)"
-ACOES = {"triagem", "aprovar", "devolver", "atualizar_pendencias", "retomar", "limpar", "faxina", "remover_anexo", "novo_card", "confirmar_card", "revisar_pr"}
+ACOES = {"triagem", "aprovar", "devolver", "atualizar_pendencias", "retomar", "limpar", "faxina", "remover_anexo", "novo_card", "confirmar_card", "revisar_pr", "sugestao_aprovar", "sugestao_ignorar", "sugestao_duplicada"}
+SUG_ID_RE = re.compile(r"^s[0-9A-Za-z_-]{6,60}$")
 PR_URL_RE = re.compile(r"^https://github\.com/(leme-tech)/([A-Za-z0-9._-]+)/pull/(\d+)/?(?:[#?].*)?$")
 PESSOAS = {"glauco", "feda"}
 DOCS = {"triagem": "triagem.md", "implementacao": "implementacao.md", "review": "review.md", "qa": "qa.md", "aprendizados": "aprendizados-qa.md", "achados": "achados.json"}
@@ -657,6 +658,24 @@ def collect_novos():
     return out[:30]
 
 
+def collect_sugestoes():
+    base = esteira_dir()
+    if base is None or not (base / "sugestoes").is_dir():
+        return []
+    out = []
+    for d in (base / "sugestoes").iterdir():
+        if not d.is_dir() or not SUG_ID_RE.match(d.name):
+            continue
+        sg = read_json(d / "sugestao.json", None)
+        if not isinstance(sg, dict):
+            continue
+        est = read_json(d / "estado.json", {}) or {}
+        imgs = sorted(f.name for f in d.iterdir() if f.is_file() and f.suffix.lower() in IMG_TYPES)[:12]
+        out.append({"id": d.name, "s": sg, "estado": est, "imagens": imgs})
+    out.sort(key=lambda x: -(x["s"].get("criado") or 0))
+    return out[:60]
+
+
 def card_dir(key):
     base = esteira_dir()
     if base is None or not KEY_RE.match(key):
@@ -693,7 +712,22 @@ def enqueue(payload):
             est = read_json(d / "estado.json", {}) or {}
             if est.get("etapa") not in ("concluido", "erro", "inviavel", None):
                 return 409, f"{key} já está na esteira"
-    if acao not in ("atualizar_pendencias", "faxina", "novo_card", "confirmar_card", "revisar_pr") and not KEY_RE.match(key):
+    sug = None
+    if acao.startswith("sugestao_"):
+        sug = str(payload.get("sugestao", ""))
+        base_e = esteira_dir()
+        if not SUG_ID_RE.match(sug) or base_e is None or not (base_e / "sugestoes" / sug / "sugestao.json").is_file():
+            return 404, "essa sugestão não existe mais"
+        if acao == "sugestao_aprovar":
+            tit = str(payload.get("titulo", "") or "").strip()
+            if len(tit) < 5 or str(payload.get("tipo", "")).lower() not in ("bug", "tarefa") or str(payload.get("responsavel", "")).lower() not in PESSOAS:
+                return 400, "título, tipo e responsável são obrigatórios"
+        if acao == "sugestao_duplicada":
+            if not KEY_RE.match(key):
+                return 400, "informe o card que já existe (ex.: LM-1234)"
+        if acao == "sugestao_ignorar" and not comentario:
+            return 400, "diga por que ignorar (ajuda o ouvidor a aprender)"
+    if acao not in ("atualizar_pendencias", "faxina", "novo_card", "confirmar_card", "revisar_pr", "sugestao_aprovar", "sugestao_ignorar") and not KEY_RE.match(key):
         return 400, "card inválido"
     if acao == "devolver" and not comentario:
         return 400, "devolver precisa de um comentário"
@@ -713,6 +747,15 @@ def enqueue(payload):
         item["novo"] = novo_id
     if pr:
         item.update(pr)
+    if sug:
+        item["sugestao"] = sug
+        if acao == "sugestao_aprovar":
+            item.update({
+                "titulo": str(payload.get("titulo", "")).strip()[:250],
+                "descricao": str(payload.get("descricao", "") or "").strip()[:30000],
+                "tipo": str(payload.get("tipo", "")).lower(),
+                "responsavel": str(payload.get("responsavel", "")).lower(),
+            })
     if acao == "aprovar" and key.startswith("PR-") and isinstance(payload.get("comentarios"), list):
         coms = []
         for c in payload["comentarios"][:80]:
@@ -776,8 +819,59 @@ def build_state():
         "requests": requests,
         "esteira": collect_pipeline(),
         "novos": collect_novos(),
+        "sugestoes": collect_sugestoes(),
         "permissoes": collect_permissions(now),
         "custos_7d": custos_por_setor(read_custos(), now - 7 * 86400),
+    }
+
+
+JIRA_FEITO = {"testando", "aguardando release", "aguardando o release", "em release", "done", "concluido", "concluído"}
+
+
+def resumo_compacto():
+    import unicodedata
+    norm = lambda t: unicodedata.normalize("NFD", str(t or "")).encode("ascii", "ignore").decode().lower().strip()
+    feito = {norm(x) for x in JIRA_FEITO}
+    st = build_state()
+    now = st["now"]
+    est = st["esteira"]
+    cards = est["cards"]
+    pessoa = lambda n: "feda" if re.search(r"fernanda|feda", n or "", re.I) else ("glauco" if re.search(r"glauco", n or "", re.I) else (n or "?"))
+    def c_curto(c):
+        return {k: v for k, v in {
+            "card": c.get("key"), "titulo": c.get("summary"), "responsavel": pessoa(c.get("assignee")),
+            "etapa": c.get("etapa"), "status": c.get("status"), "resumo": c.get("resumo"),
+            "voltas_qa": c.get("voltas_qa") or None, "voltas_review": c.get("voltas_review") or None,
+            "preview_url": c.get("preview_url"), "pr_url": c.get("pr_url"), "merged_em": c.get("merged_em"),
+            "custo_usd": c.get("custo_usd"), "atualizado_ha_min": int((now - (c.get("atualizado") or now)) / 60),
+        }.items() if v not in (None, "", [])}
+    ativos = [c for c in cards if c.get("etapa") != "concluido"]
+    pend = [i for i in est["pendencias"]["items"] if norm(i.get("status")) not in feito]
+    na_esteira = {c.get("key") for c in cards}
+    por_pessoa = {}
+    for i in pend:
+        por_pessoa.setdefault(pessoa(i.get("assignee")), []).append({"card": i.get("key"), "titulo": i.get("summary"), "status_jira": i.get("status"), "na_esteira": i.get("key") in na_esteira})
+    concl = sorted([c for c in cards if c.get("etapa") == "concluido"], key=lambda c: -(c.get("atualizado") or 0))[:5]
+    usage = est.get("usage") or {}
+    def janela(w):
+        if not w or (w.get("resets_at") and w["resets_at"] < now):
+            return None
+        return {"usado_pct": round(w.get("used_percentage") or 0), "reseta_em": time.strftime("%d/%m %H:%M", time.localtime(w["resets_at"])) if w.get("resets_at") else None}
+    perms = [p for p in st.get("permissoes", []) if not p.get("respondida")]
+    rodando = [c for c in ativos if c.get("status") == "rodando" and c.get("etapa") != "fila"]
+    return {
+        "escritorio": "Leme",
+        "gerado_em": time.strftime("%d/%m/%Y %H:%M", time.localtime(now)),
+        "vagas": {"em_uso": len(rodando), "max": (est.get("config") or {}).get("max_ativos")},
+        "rodando": [c_curto(c) for c in rodando],
+        "na_fila": [c_curto(c) for c in ativos if c.get("etapa") == "fila"],
+        "esperando_voces": [c_curto(c) for c in ativos if c.get("status") == "aguardando_humano"],
+        "com_erro": [c_curto(c) for c in ativos if c.get("etapa") == "erro" or c.get("status") == "falhou"],
+        "permissoes_pendentes": [{"agente": p.get("agente"), "card": p.get("card"), "ferramenta": p.get("ferramenta"), "resumo": p.get("resumo")} for p in perms],
+        "pendencias_jira": {"total": len(pend), "por_pessoa": por_pessoa},
+        "concluidos_recentes": [c_curto(c) for c in concl],
+        "uso_claude": {"sessao_5h": janela(usage.get("five_hour")), "semana": janela(usage.get("seven_day"))},
+        "custo_7d_usd_por_setor": st.get("custos_7d") or {},
     }
 
 
@@ -802,6 +896,12 @@ class Handler(BaseHTTPRequestHandler):
             except Exception as exc:
                 self.send(500, json.dumps({"error": str(exc)}).encode(), "application/json")
             return
+        if path == "/api/resumo":
+            try:
+                self.send(200, json.dumps(resumo_compacto(), ensure_ascii=False, indent=1).encode(), "application/json; charset=utf-8")
+            except Exception as exc:
+                self.send(500, json.dumps({"error": str(exc)}).encode(), "application/json")
+            return
         if path == "/api/custos":
             q = urllib.parse.parse_qs(self.path.partition("?")[2])
             try:
@@ -812,6 +912,16 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/healthz":
             self.send(200, b"ok", "text/plain")
+            return
+        ms = re.match(r"^/api/sugestao/(s[0-9A-Za-z_-]+)/img/([A-Za-z0-9._-]+)$", path)
+        if ms and SUG_ID_RE.match(ms.group(1)) and IMG_NOME_RE.match(ms.group(2)):
+            base_e = esteira_dir()
+            dd = base_e / "sugestoes" / ms.group(1) if base_e else None
+            f = dd / ms.group(2) if dd else None
+            if f is not None and f.is_file() and f.suffix.lower() in IMG_TYPES and f.resolve().parent == dd.resolve():
+                self.send(200, f.read_bytes(), IMG_TYPES[f.suffix.lower()])
+                return
+            self.send(404, b"not found", "text/plain")
             return
         mn = re.match(r"^/api/novo/(n[0-9a-z]+)/img/([A-Za-z0-9._-]+)$", path)
         if mn and NOVO_ID_RE.match(mn.group(1)) and IMG_NOME_RE.match(mn.group(2)):

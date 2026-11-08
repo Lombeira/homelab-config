@@ -58,6 +58,7 @@ LH=/h/leme
 mkdir -p "$L/workspace" "$L/home"
 rsync -a --exclude '/repos/' --exclude '.git/' --exclude 'node_modules' --exclude '__pycache__' \
   --exclude '.obsidian/workspace*.json' --exclude '/.escritorio/permissoes/' --exclude '/.escritorio/respostas/' \
+  --exclude '/.escritorio/slack/' --exclude '/.escritorio/sugestoes/' --exclude '/.escritorio/novos/' --exclude 'slack-estado.json' \
   "$LH/workspace/" "$L/workspace/"
 mkdir -p "$L/home/.claude" "$L/home/.config/systemd/user" "$L/home/.local/bin" "$L/home/.ssh" "$L/home/git"
 for f in settings.json CLAUDE.md; do [ -f "$LH/.claude/$f" ] && cp "$LH/.claude/$f" "$L/home/.claude/"; done
