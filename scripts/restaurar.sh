@@ -4,6 +4,7 @@
 #      sudo bash restaurar.sh --ensaio        (teste: sobe só o que não tem efeito fora da máquina)
 #      opções: --ip <IP desta máquina>        (sem a opção, pergunta; padrão = IP detectado)
 #              --pular-kit                    (reaproveita um kit já aberto; só serve para repetir ensaio)
+{
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 IP_ANTIGO=192.168.1.173
@@ -51,7 +52,17 @@ if [ $PULAR_KIT = 0 ]; then
   chsh -s /usr/bin/zsh glauco || true
 
   echo "== 4/8 Abrindo o kit (digite a senha do kit)"
-  cat "$KIT"/homelab-*.part* | gpg --pinentry-mode loopback -d | zstd -dq | tar --numeric-owner -xpf - -C /
+  GNUPGHOME=$(mktemp -d); chmod 700 "$GNUPGHOME"; export GNUPGHOME
+  CHAVE=""; for c in "$KIT/chave-privada.asc" "$KIT/../chave-privada.asc"; do [ -f "$c" ] && { CHAVE="$c"; break; }; done
+  if [ -n "$CHAVE" ]; then
+    gpg --batch -q --import "$CHAVE"
+  elif grep -q '^:pubkey enc packet' <<<"$(head -c 65536 "$(ls "$KIT"/homelab-*.part* | head -1)" | gpg --batch --list-packets 2>/dev/null || true)"; then
+    echo "!! Este kit é aberto pela chave-privada.asc e ela não está no pendrive."
+    echo "   Copie uma das cópias (Drive, e-mail) para $KIT/ e rode de novo."; exit 1
+  fi
+  read -r -s -p "Senha do kit: " SENHA_KIT; echo
+  cat "$KIT"/homelab-*.part* | gpg --batch --pinentry-mode loopback --passphrase-fd 3 -d 3< <(printf '%s' "$SENHA_KIT") | zstd -dq | tar --numeric-owner -xpf - -C /
+  unset SENHA_KIT; gpgconf --kill all; rm -rf "$GNUPGHOME"; unset GNUPGHOME
   chmod 750 /home/leme /home/glauco
 fi
 
@@ -140,3 +151,5 @@ cat <<TXT
 - O Claude do leme já volta logado; se pedir login, rode 'claude' como leme.
 ==================================================
 TXT
+exit
+}

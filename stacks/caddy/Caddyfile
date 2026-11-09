@@ -10,3 +10,15 @@ http://escritorio.casa {
 		reverse_proxy 127.0.0.1:3010
 	}
 }
+
+http://escritorio-uber.casa {
+	reverse_proxy 192.168.1.244:8791 {
+		transport http {
+			dial_timeout 3s
+		}
+	}
+	handle_errors {
+		header Content-Type "text/html; charset=utf-8"
+		respond "<!doctype html><meta charset=utf-8><meta name=viewport content=\"width=device-width,initial-scale=1\"><title>Escritório UBS</title><body style=\"margin:0;display:grid;place-items:center;height:100vh;background:#1a0b03;color:#f3e9e0;font:16px system-ui;text-align:center\"><div><div style=\"font-size:40px\">🟠</div><h2>Escritório UBS desligado</h2><p style=\"color:#b59a86\">Ele roda no PC do Glauco. O PC está ligado?</p><p><a style=\"color:#ffb070\" href=\"http://escritorio.casa\">Voltar ao Escritório Leme</a></p></div>" 502
+	}
+}

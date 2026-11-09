@@ -1,1 +1,29 @@
-[]
+- Escritórios:
+    - Escritório UBS:
+        icon: mdi-office-building-cog
+        href: http://escritorio-uber.casa
+        description: Esteira de cards da Ubersuggest (roda no PC do Glauco)
+        siteMonitor: http://192.168.1.244:8791
+        widget:
+          type: customapi
+          url: http://192.168.1.244:8791/api/estado
+          refreshInterval: 60000
+          mappings:
+            - field: custo_hoje
+              label: Gasto hoje
+              format: float
+              prefix: "US$ "
+- Monitoramento:
+    - Kit do pendrive:
+        icon: mdi-usb-flash-drive
+        description: backup criptografado, semanal (domingo 4h)
+        widget:
+          type: customapi
+          url: http://127.0.0.1:3000/status/kit.json
+          refreshInterval: 600000
+          mappings:
+            - field: ultimo_ok
+              label: Última gravação
+              format: relativeDate
+            - field: resultado
+              label: Última tentativa

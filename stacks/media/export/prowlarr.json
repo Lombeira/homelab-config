@@ -6884,6 +6884,11 @@
             "subCategories": []
           },
           {
+            "id": 100017,
+            "name": "Abora OS",
+            "subCategories": []
+          },
+          {
             "id": 100013,
             "name": "Absolute",
             "subCategories": []
@@ -6931,6 +6936,11 @@
           {
             "id": 102007,
             "name": "AntiX",
+            "subCategories": []
+          },
+          {
+            "id": 100016,
+            "name": "AOSC OS",
             "subCategories": []
           },
           {
@@ -7404,6 +7414,11 @@
             "subCategories": []
           },
           {
+            "id": 100015,
+            "name": "Galactic Mandate Linux",
+            "subCategories": []
+          },
+          {
             "id": 102235,
             "name": "GALPon MiniNo",
             "subCategories": []
@@ -7466,6 +7481,11 @@
           {
             "id": 102228,
             "name": "Guix System",
+            "subCategories": []
+          },
+          {
+            "id": 100011,
+            "name": "HackerOS",
             "subCategories": []
           },
           {
@@ -8174,6 +8194,11 @@
             "subCategories": []
           },
           {
+            "id": 100012,
+            "name": "Spaced Linux",
+            "subCategories": []
+          },
+          {
             "id": 101236,
             "name": "SparkyLinux",
             "subCategories": []
@@ -8186,6 +8211,11 @@
           {
             "id": 102225,
             "name": "Star",
+            "subCategories": []
+          },
+          {
+            "id": 100018,
+            "name": "StartOS",
             "subCategories": []
           },
           {

@@ -8,6 +8,7 @@ services:
     volumes:
       - ./config:/app/config
       - ./images:/app/public/images
+      - ./status:/app/public/status:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS=nossa.casa,home.casa,casa.lan,nossa.casa:3002,status.casa:3002,192.168.1.173:3002,192.168.1.173
+      - HOMEPAGE_ALLOWED_HOSTS=nossa.casa,home.casa,casa.lan,nossa.casa:3002,status.casa:3002,192.168.1.173:3002,192.168.1.173,127.0.0.1:3000

@@ -308,6 +308,9 @@
   .error { display: none; margin: 14px 28px 0; padding: 10px 14px; border-radius: 8px; background: #3a1f24; color: #ffb3b8; border: 1px solid #5c2a31; }
   .hbtn { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); font-family: inherit; font-weight: 600; font-size: 13px; cursor: pointer; }
   .hbtn:hover { border-color: #3a4256; background: #283042; }
+  a.hbtn { text-decoration: none; } .hbtn[hidden] { display: none; }
+  .hbtn-uber { border-color: rgba(255,154,74,.55); background: rgba(52,26,9,.85); color: #ffe0c4; }
+  .hbtn-uber:hover { border-color: #ff9a4a; background: rgba(74,37,12,.95); }
   .hbtn .badge { min-width: 20px; padding: 0 6px; border-radius: 999px; background: var(--accent); color: #1b1407; font: 800 11px var(--mono); line-height: 20px; text-align: center; }
   .seg { display: inline-flex; padding: 3px; border-radius: 9px; background: var(--panel-2); border: 1px solid var(--line); }
   .seg button { border: 0; background: transparent; color: var(--muted); font-family: inherit; font-weight: 600; font-size: 12px; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
@@ -533,6 +536,7 @@
     <button class="hbtn perm-btn" id="perm-btn" hidden title="Permissões">✋ <span class="lbl">Permissões</span> <span class="badge" id="perm-badge">0</span></button>
     <button class="hbtn" id="pend-btn" title="Pendências">📋 <span class="lbl">Pendências</span> <span class="badge" id="pend-badge">0</span></button>
     <button class="hbtn" id="done-btn" title="Concluídos">✅ <span class="lbl">Concluídos</span> <span class="badge done-badge" id="done-badge">0</span></button>
+    <a class="hbtn hbtn-uber" id="uber-btn" href="http://escritorio-uber.casa" title="Ir para o Escritório UBS">🟠 <span class="lbl">Escritório UBS</span></a>
     <button class="hbtn" id="cost-btn" title="Custos">💰 <span class="lbl">Custos</span></button>
     <button class="hbtn" id="brain-btn" title="Cérebro">🧠 <span class="lbl">Cérebro</span></button>
     <button class="hbtn" id="term-btn" title="Terminal">🖥️ <span class="lbl">Terminal</span></button>

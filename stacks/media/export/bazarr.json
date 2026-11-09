@@ -8,13 +8,13 @@
       },
       {
         "name": "legendasdivx",
-        "retry": "-",
-        "status": "Good"
+        "retry": "in 54 minutes",
+        "status": "AuthenticationError"
       },
       {
         "name": "legendasnet",
-        "retry": "-",
-        "status": "Good"
+        "retry": "in 54 minutes",
+        "status": "ConfigurationError"
       },
       {
         "name": "opensubtitlescom",
@@ -23,8 +23,8 @@
       },
       {
         "name": "pipocas",
-        "retry": "-",
-        "status": "Good"
+        "retry": "in 54 minutes",
+        "status": "ConfigurationError"
       },
       {
         "name": "subdl",
