@@ -7454,6 +7454,11 @@
             "subCategories": []
           },
           {
+            "id": 100022,
+            "name": "GNUSlashLinux",
+            "subCategories": []
+          },
+          {
             "id": 100216,
             "name": "GoboLinux",
             "subCategories": []
@@ -7514,6 +7519,11 @@
             "subCategories": []
           },
           {
+            "id": 100021,
+            "name": "Helwan Linux",
+            "subCategories": []
+          },
+          {
             "id": 102293,
             "name": "Hiren's BootCD+PE",
             "subCategories": []
@@ -7526,6 +7536,11 @@
           {
             "id": 102244,
             "name": "Hyperbola GNU",
+            "subCategories": []
+          },
+          {
+            "id": 100020,
+            "name": "Infinity Linux",
             "subCategories": []
           },
           {
@@ -7556,6 +7571,11 @@
           {
             "id": 102181,
             "name": "KDE Neon",
+            "subCategories": []
+          },
+          {
+            "id": 100023,
+            "name": "KibaOS",
             "subCategories": []
           },
           {
@@ -7704,6 +7724,11 @@
             "subCategories": []
           },
           {
+            "id": 100019,
+            "name": "MODICIA O.S.",
+            "subCategories": []
+          },
+          {
             "id": 102163,
             "name": "MOFO Linux",
             "subCategories": []
@@ -7726,6 +7751,11 @@
           {
             "id": 100373,
             "name": "Mythbuntu",
+            "subCategories": []
+          },
+          {
+            "id": 100025,
+            "name": "NagisinnraLinux",
             "subCategories": []
           },
           {
@@ -8304,6 +8334,11 @@
             "subCategories": []
           },
           {
+            "id": 100026,
+            "name": "TTOS Linux",
+            "subCategories": []
+          },
+          {
             "id": 102140,
             "name": "TurnKey",
             "subCategories": []
@@ -8456,6 +8491,11 @@
           {
             "id": 100607,
             "name": "Xubuntu",
+            "subCategories": []
+          },
+          {
+            "id": 100024,
+            "name": "ZelixOS",
             "subCategories": []
           },
           {
