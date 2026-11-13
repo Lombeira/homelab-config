@@ -13,8 +13,8 @@
       },
       {
         "name": "legendasnet",
-        "retry": "in 54 minutes",
-        "status": "ConfigurationError"
+        "retry": "-",
+        "status": "Good"
       },
       {
         "name": "opensubtitlescom",
@@ -23,8 +23,8 @@
       },
       {
         "name": "pipocas",
-        "retry": "-",
-        "status": "Good"
+        "retry": "in 54 minutes",
+        "status": "ConfigurationError"
       },
       {
         "name": "subdl",

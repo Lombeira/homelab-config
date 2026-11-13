@@ -192,7 +192,7 @@ filtering:
   rewrites_enabled: true
   parental_enabled: false
   safebrowsing_enabled: false
-  protection_enabled: true
+  protection_enabled: false
 clients:
   runtime_sources:
     whois: true
