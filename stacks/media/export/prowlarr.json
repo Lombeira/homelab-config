@@ -6979,6 +6979,11 @@
             "subCategories": []
           },
           {
+            "id": 100033,
+            "name": "Argent Linux",
+            "subCategories": []
+          },
+          {
             "id": 102216,
             "name": "Artix Linux",
             "subCategories": []
@@ -7126,6 +7131,11 @@
           {
             "id": 102028,
             "name": "Calculate Linux",
+            "subCategories": []
+          },
+          {
+            "id": 100027,
+            "name": "CatOS",
             "subCategories": []
           },
           {
@@ -7534,6 +7544,11 @@
             "subCategories": []
           },
           {
+            "id": 100031,
+            "name": "Hybrid-d77",
+            "subCategories": []
+          },
+          {
             "id": 102244,
             "name": "Hyperbola GNU",
             "subCategories": []
@@ -7546,6 +7561,11 @@
           {
             "id": 100252,
             "name": "IPFire",
+            "subCategories": []
+          },
+          {
+            "id": 100030,
+            "name": "Kader⁴²",
             "subCategories": []
           },
           {
@@ -7704,6 +7724,11 @@
             "subCategories": []
           },
           {
+            "id": 100028,
+            "name": "Maple Linux",
+            "subCategories": []
+          },
+          {
             "id": 100343,
             "name": "MidnightBSD",
             "subCategories": []
@@ -7841,6 +7866,11 @@
           {
             "id": 102090,
             "name": "OpenIndiana",
+            "subCategories": []
+          },
+          {
+            "id": 100029,
+            "name": "openKylin",
             "subCategories": []
           },
           {
@@ -8106,6 +8136,11 @@
           {
             "id": 102116,
             "name": "Robolinux",
+            "subCategories": []
+          },
+          {
+            "id": 100032,
+            "name": "Rocky Linux",
             "subCategories": []
           },
           {
@@ -9704,7 +9739,7 @@
         "https://nyaa.si/",
         "https://nyaa.iss.ink/",
         "https://nyaa.land/",
-        "https://nyaa.mom/",
+        "https://nyaa.wiki/",
         "https://nyaa.media/"
       ],
       "infoLink": "https://wiki.servarr.com/prowlarr/supported-indexers#nyaasi",
@@ -9722,7 +9757,8 @@
         "https://nyaa.lol/",
         "https://nyaa.mrunblock.bond/",
         "https://nyaa.nocensor.cloud/",
-        "https://nyaa.unblockninja.com/"
+        "https://nyaa.unblockninja.com/",
+        "https://nyaa.mom/"
       ],
       "name": "Nyaa.si",
       "priority": 25,
@@ -11020,12 +11056,13 @@
       "implementationName": "Cardigann",
       "indexerUrls": [
         "https://sukebei.nyaa.si/",
-        "https://sukebei.nyaa.mom/"
+        "https://sukebei.nyaa.wiki/"
       ],
       "infoLink": "https://wiki.servarr.com/prowlarr/supported-indexers#sukebeinyaasi",
       "language": "en-US",
       "legacyUrls": [
-        "https://sukebei.nyaa.lol/"
+        "https://sukebei.nyaa.lol/",
+        "https://sukebei.nyaa.mom/"
       ],
       "name": "sukebei.nyaa.si",
       "priority": 25,
